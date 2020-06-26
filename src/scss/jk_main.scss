@@ -25,19 +25,16 @@
 	border-bottom: 1px solid rgba(0,0,0, 0.08);
 	border-left: 1px solid rgba(0,0,0, 0.5);
 	border-radius: 50%;
-	-webkit-animation: spinner 700ms infinite linear;
 	animation: spinner 700ms infinite linear;
 	z-index: 1001;
 }
 
 @keyframes spinner {
 	0% {
-		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
 	}
 
 	100% {
-		-webkit-transform: rotate(360deg);
 		transform: rotate(360deg);
 	}
 }
@@ -54,7 +51,6 @@
 	color: #000;
 	box-sizing: border-box;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	-moz-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -67,10 +63,6 @@ body {
 	bottom: 0;
 	overflow: hidden;
 	margin: 0;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
 }
 
 #home_background {
@@ -82,11 +74,7 @@ body {
 	z-index: -10;
 	background-position-y: center;
 	background-repeat: no-repeat;
-	-webkit-background-size: cover !important;
-	-moz-background-size: cover;
-	-o-background-size: cover;
 	background-size: cover;
-	/*background-attachment: fixed;*/
 }
 
 a {
@@ -131,13 +119,12 @@ h2 {
 
 /* Scrollbar-Design rumgehacke (mega!) */
 
-body, #navi_main, #main {
-	scrollbar-width: thin;
-	scrollbar-color: rgba(0,0,0,0.12) rgba(0,0,0,0.02);
-}
+$track-color: rgba(0,0,0,0.02);
+$thumb-color: rgba(0,0,0,0.12);
 
-#navi_main:hover, #main:hover {
-	scrollbar-color: rgba(0,0,0,0.45) rgba(0,0,0,0.05);
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $thumb-color $track-color;
 }
 
 *::-webkit-scrollbar {
@@ -145,22 +132,12 @@ body, #navi_main, #main {
 	height: 6px;
 }
 
-*::-webkit-scrollbar-thumb {
-	background-color: rgba(0,0,0,0.12);
-}
-
 *::-webkit-scrollbar-track {
-	background-color: rgba(0,0,0,0.02);
+	background-color: $track-color;
 }
 
-#navi_main:hover::-webkit-scrollbar-thumb,
-#main:hover::-webkit-scrollbar-thumb {
-	background-color: rgba(0,0,0,0.45);
-}
-
-#navi_main:hover::-webkit-scrollbar-track,
-#main:hover::-webkit-scrollbar-track {
-	background-color: rgba(0,0,0,0.05);
+*::-webkit-scrollbar-thumb {
+	background-color: $thumb-color;
 }
 
 /* Container-relevante Styles */
@@ -341,13 +318,14 @@ ul.sublist > :first-child {
 #film_container {
 	display: flex;
 	flex-flow: row wrap;
-	align-content: start;
+	align-content: flex-start;
 }
 
 .filmframe {
 	margin: 1%;
 	flex: auto;
 	width: 380px;
+	cursor: pointer;
 }
 
 .filmframe > div {

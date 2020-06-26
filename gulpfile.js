@@ -28,7 +28,11 @@ sass.compiler = require('dart-sass');
 
 let developmentFolder = 'src';
 let productionFolder = 'dist';
-let excludeCondition = '*.psd';
+let excludeCondition = [
+			'*.psd',
+			'index_dev.php',
+];
+
 let moveFiles = [
 			'.htaccess',
 			'*.php',
@@ -86,7 +90,7 @@ gulp.task('reload', function(done){
 //change-watchers
 gulp.task('watch', function() {
 	gulp.watch(developmentFolder+'/scss/*.scss', gulp.series('sass','reload'));
-	gulp.watch(developmentFolder+'/**/!(index).htm?(l)', gulp.series('fileinclude','reload'));
+	gulp.watch(developmentFolder+'/**/!(index).@(htm?(l)|php)', gulp.series('fileinclude','reload'));
 	gulp.watch(developmentFolder+'/index_*.php', gulp.series('fileinclude','reload'));
 	gulp.watch(developmentFolder+'/js/*.js', gulp.series('reload'));
 	gulp.watch(developmentFolder+'/img/**', gulp.series('reload'));
@@ -134,6 +138,7 @@ gulp.task('move-files', function(){
 gulp.task('move-leftovers', function(){
 	return gulp.src(developmentFolder+'/**', { dot: true })
 		.pipe(filter.include(moveFiles))
+		.pipe(filter.exclude(excludeCondition))
 		.pipe(gulp.dest(productionFolder))
 });
 

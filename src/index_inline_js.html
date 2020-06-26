@@ -1,0 +1,31 @@
+<!-- startup and loader javascript -->
+<script>
+	//some startup scripts
+	function startup() {
+		document.getElementsByClassName('loader')[0].classList.add("global_hide");
+		document.getElementsByClassName('page_loader')[0].classList.add("global_hide");
+		document.getElementById('container').classList.remove("hide_container");
+		console.log("onload!");
+	};
+
+	WebFontConfig = {
+		google: { families: [ 'Titillium+Web' ] }
+	};
+
+	(function() {
+		var wf = document.createElement('script');
+		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+		wf.type = 'text/javascript';
+		wf.async = 'true';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(wf, s);
+	})();
+
+	(new Image()).src = "img/menu/menu-to-logo.gif";
+	(new Image()).src = "img/menu/logo-to-menu.gif";
+
+	// scripts are loaded async, so wait for them to be loaded, then execute the startup!
+	window.addEventListener("load", function() {
+		startup();
+	});
+</script>
